@@ -1,4 +1,6 @@
 
+FROM ubuntu:20.04 AS builder
+
 ## Install build dependencies.
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y cmake clang
@@ -16,5 +18,5 @@ RUN mkdir build && \
 FROM --platform=linux/amd64 ubuntu:20.04
 
 ## TODO: Change <Path in Builder Stage>
-COPY --from=builder /mayhem-cmake-example/build/fuzzme  /
+COPY --from=builder /mayhem-cmake-example/build/fuzzme /
 
